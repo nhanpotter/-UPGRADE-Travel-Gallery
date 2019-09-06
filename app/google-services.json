@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "847284408399",
+    "firebase_url": "https://travel-gallery-231213.firebaseio.com",
+    "project_id": "travel-gallery-231213",
+    "storage_bucket": "travel-gallery-231213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847284408399:android:332a613fe3ec81f7fe9a3a",
+        "android_client_info": {
+          "package_name": "tech.ducletran.travelgalleryupgrade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847284408399-prr0pp3motmfg62b8ape5mres27hhqlf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.ducletran.travelgalleryupgrade",
+            "certificate_hash": "0dcb4aab3551e835363376adbf18a7a1711d510a"
+          }
+        },
+        {
+          "client_id": "847284408399-46tdu3e6d215gs4468qo7acrr302pvag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUlE-u5cmmbRL0_ULjw5OlipfjFT22IO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847284408399-46tdu3e6d215gs4468qo7acrr302pvag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
