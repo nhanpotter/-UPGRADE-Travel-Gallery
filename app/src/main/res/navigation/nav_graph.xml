@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/photosFragment">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:label="@string/account"
+        android:name="tech.ducletran.travelgalleryupgrade.account.AccountFragment"
+        tools:layout="@layout/fragment_account"/>
+
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:label="@string/albums"
+        android:name="tech.ducletran.travelgalleryupgrade.albums.AlbumsFragment"
+        tools:layout="@layout/fragment_albums"/>
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:label="@string/photos"
+        android:name="tech.ducletran.travelgalleryupgrade.photos.PhotosFragment"
+        tools:layout="@layout/fragment_photos"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:label="@string/settings"
+        android:name="tech.ducletran.travelgalleryupgrade.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
+
+    <fragment
+        android:id="@+id/travelGoalsFragment"
+        android:label="@string/travel_goals"
+        android:name="tech.ducletran.travelgalleryupgrade.travelgoals.TravelGoalsFragment"
+        tools:layout="@layout/fragment_travel_goals"/>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:label="@string/map"
+        android:name="tech.ducletran.travelgalleryupgrade.map.MapFragment"
+        tools:layout="@layout/fragment_map"/>
+
+</navigation>
