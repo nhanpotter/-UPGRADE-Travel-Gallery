@@ -10,6 +10,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'androidx.navigation.safeargs.kotlin' // Safe Args Plugin
 
+apply plugin: 'com.diffplug.gradle.spotless'
+
 android {
     dataBinding {
         enabled = true
@@ -35,6 +37,14 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
+    }
+}
+
+spotless {
+    kotlin {
+        target project.fileTree(dir: 'src', include: '**/*.kt')
+        trimTrailingWhitespace()
+        ktlint("0.30.0")
     }
 }
 

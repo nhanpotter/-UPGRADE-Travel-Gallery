@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import tech.ducletran.travelgalleryupgrade.R
 
-class TravelGoalsFragment: Fragment() {
+class TravelGoalsFragment : Fragment() {
 
     private lateinit var rootView: View
 

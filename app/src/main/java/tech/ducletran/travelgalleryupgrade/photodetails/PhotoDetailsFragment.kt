@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 
-class PhotoDetailsFragment: Fragment() {
+class PhotoDetailsFragment : Fragment() {
 
     private val photoDetailsViewModel by viewModel<PhotoDetailsViewModel>()
     private lateinit var rootView: View
@@ -28,7 +28,6 @@ class PhotoDetailsFragment: Fragment() {
 
         photoDetailsViewModel.message
             .observe(viewLifecycleOwner, Observer {
-
             })
 
         photoDetailsViewModel.photo

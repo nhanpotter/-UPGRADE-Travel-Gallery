@@ -26,7 +26,7 @@ import tech.ducletran.travelgalleryupgrade.ext.notNull
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLatitude
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLongitude
 
-class PhotosFragment: Fragment() {
+class PhotosFragment : Fragment() {
 
     companion object {
         private const val PICK_PHOTO_REQUEST_CODE = 1
@@ -43,7 +43,7 @@ class PhotosFragment: Fragment() {
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_photos, container, false)
 
-        val layoutManager = GridLayoutManager(requireContext(),4,GridLayoutManager.VERTICAL, false)
+        val layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         rootView.photoGrids.layoutManager = layoutManager
         rootView.photoGrids.adapter = photosAdapter
 
@@ -77,7 +77,7 @@ class PhotosFragment: Fragment() {
             importPhotosFromGallery()
         }
 
-        photosAdapter.applyListener(object: PhotoClickListener {
+        photosAdapter.applyListener(object : PhotoClickListener {
             override fun onPhotoClicked(photoId: Long) {
                 Navigation.findNavController(rootView)
                     .navigate(PhotosFragmentDirections.actionPhotosToPhotoDetail(photoId))
@@ -106,7 +106,7 @@ class PhotosFragment: Fragment() {
         val title = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
         val size = cursor.getString(cursor.getColumnIndex(OpenableColumns.SIZE))
         var photo = Photo(url = photoUri.toString(), title = title, size = size)
-        contentResolver.openInputStream(photoUri)?.let {stream ->
+        contentResolver.openInputStream(photoUri)?.let { stream ->
             ExifInterface(stream).let {
                 photo = getPhotoWithMetadata(photo, it)
             }
@@ -128,7 +128,7 @@ class PhotosFragment: Fragment() {
             val title = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
             val size = cursor.getString(cursor.getColumnIndex(OpenableColumns.SIZE))
             var photo = Photo(url = photoUri.toString(), title = title, size = size)
-            contentResolver.openInputStream(photoUri)?.let {stream ->
+            contentResolver.openInputStream(photoUri)?.let { stream ->
                 ExifInterface(stream).let {
                     photo = getPhotoWithMetadata(photo, it)
                 }

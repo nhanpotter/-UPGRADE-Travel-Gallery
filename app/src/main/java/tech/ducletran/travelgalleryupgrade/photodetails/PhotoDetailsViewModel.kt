@@ -16,7 +16,7 @@ import timber.log.Timber
 class PhotoDetailsViewModel(
     private val photosService: PhotosService,
     private val resource: Resource
-): ViewModel() {
+) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -32,8 +32,8 @@ class PhotoDetailsViewModel(
             .getDefaultSchedulers()
             .subscribe({
                 mutablePhoto.value = it
-            },{
-                Timber.e(it,"Error loading photo with ID $photoId")
+            }, {
+                Timber.e(it, "Error loading photo with ID $photoId")
             })
     }
 
@@ -45,7 +45,7 @@ class PhotoDetailsViewModel(
             .subscribe({
                 message.value = if (isFriend) resource.getString(R.string.message_photo_added_to_friend) else
                     resource.getString(R.string.message_photo_removed_from_friend)
-            },{
+            }, {
                 message.value = if (isFriend) resource.getString(R.string.error_message_photo_add_to_friend) else
                     resource.getString(R.string.error_message_photo_remove_from_friend)
                 Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFriend")
@@ -60,7 +60,7 @@ class PhotoDetailsViewModel(
             .subscribe({
                 message.value = if (isFavorite) resource.getString(R.string.message_photo_added_to_favorite) else
                     resource.getString(R.string.message_photo_removed_from_favorite)
-            },{
+            }, {
                 message.value = if (isFavorite) resource.getString(R.string.error_message_photo_add_to_favorite) else
                     resource.getString(R.string.error_message_photo_remove_from_favorite)
                 Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFavorite")
@@ -75,7 +75,7 @@ class PhotoDetailsViewModel(
             .subscribe({
                 message.value = if (isFood) resource.getString(R.string.message_photo_added_to_food) else
                     resource.getString(R.string.message_photo_removed_from_food)
-            },{
+            }, {
                 message.value = if (isFood) resource.getString(R.string.error_message_photo_add_to_food) else
                     resource.getString(R.string.error_message_photo_remove_from_food)
                 Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFood")

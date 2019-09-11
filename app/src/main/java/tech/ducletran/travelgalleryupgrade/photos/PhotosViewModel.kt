@@ -10,7 +10,7 @@ import timber.log.Timber
 
 class PhotosViewModel(
     private val photosService: PhotosService
-): ViewModel() {
+) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -44,7 +44,7 @@ class PhotosViewModel(
                 mutableLoading.value = false
             }.subscribe({
                 Timber.d("LOG - Successfully inserted ${photos.size} photos")
-            },{
+            }, {
                 Timber.e("Error inserting ${photos.size} photos")
             })
     }

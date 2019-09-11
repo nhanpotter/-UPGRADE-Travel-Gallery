@@ -6,7 +6,7 @@ import tech.ducletran.travelgalleryupgrade.photos.Photo
 import tech.ducletran.travelgalleryupgrade.photos.PhotosDao
 
 @Database(entities = [Photo::class], version = 1)
-abstract class BaseDatabase: RoomDatabase() {
+abstract class BaseDatabase : RoomDatabase() {
 
     abstract fun photosDao(): PhotosDao
 }

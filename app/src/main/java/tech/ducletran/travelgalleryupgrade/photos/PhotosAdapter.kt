@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_photo.view.photo
 import tech.ducletran.travelgalleryupgrade.R
 
-class PhotosAdapter: RecyclerView.Adapter<PhotosViewHolder>() {
+class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
     private val photos = mutableListOf<Photo>()
     private var photoClickListener: PhotoClickListener? = null
 
@@ -32,10 +32,9 @@ class PhotosAdapter: RecyclerView.Adapter<PhotosViewHolder>() {
     override fun onBindViewHolder(holder: PhotosViewHolder, position: Int) {
         holder.bind(photos[position], photoClickListener)
     }
-
 }
 
-class PhotosViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class PhotosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(photo: Photo, onPhotoClicked: PhotoClickListener?) {
         Glide.with(itemView.context)

@@ -2,7 +2,6 @@ package tech.ducletran.travelgalleryupgrade.utils
 
 import android.media.ExifInterface
 
-
 object Utils {
 
     fun getLatitude(exif: ExifInterface): String {
@@ -31,14 +30,14 @@ object Utils {
         val dms = dmsString.split(",")
 
         val stringD = dms[0].split("/")
-        val dValue = stringD[0].toDouble()/stringD[1].toDouble()
+        val dValue = stringD[0].toDouble() / stringD[1].toDouble()
 
         val stringM = dms[1].split("/")
-        val mValue = stringM[0].toDouble()/stringM[1].toDouble()
+        val mValue = stringM[0].toDouble() / stringM[1].toDouble()
 
         val stringS = dms[2].split("/")
-        val sValue = stringS[0].toDouble()/stringS[1].toDouble()
+        val sValue = stringS[0].toDouble() / stringS[1].toDouble()
 
-        return dValue + mValue/60 + sValue/3600
+        return dValue + mValue / 60 + sValue / 3600
     }
 }

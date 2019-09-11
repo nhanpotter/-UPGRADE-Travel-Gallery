@@ -1,9 +1,12 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.OnConflictStrategy
+import androidx.room.Delete
+import androidx.room.Insert
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Single
 
 @Dao
 interface PhotosDao {
@@ -34,5 +37,4 @@ interface PhotosDao {
 
     @Query("UPDATE photo SET isFriend = :isFriend WHERE id = :photoId")
     fun setFriend(photoId: Long, isFriend: Boolean): Completable
-
 }

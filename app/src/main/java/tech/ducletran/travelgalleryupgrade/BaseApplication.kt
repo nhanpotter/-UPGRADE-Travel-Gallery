@@ -33,6 +33,5 @@ class BaseApplication : Application() {
             ))
         }
         Timber.plant(Timber.DebugTree())
-
     }
 }
