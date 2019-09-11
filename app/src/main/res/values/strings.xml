@@ -7,4 +7,22 @@
     <string name="travel_goals">Travel Goals</string>
     <string name="map">Map</string>
     <string name="loading">Loading...</string>
+    <string name="photo">Photo</string>
+
+    // Messages
+    <string name="message_photo_added_to_friend">This photo is added to friend\'s list</string>
+    <string name="message_photo_added_to_favorite">This photo is added to favorite\'s list</string>
+    <string name="message_photo_added_to_food">This photo is added to food\'s list</string>
+    <string name="message_photo_removed_from_friend">This photo is removed from friend\'s list</string>
+    <string name="message_photo_removed_from_favorite">This photo is removed from favorite\'s list</string>
+    <string name="message_photo_removed_from_food">This photo is removed from food\'s list</string>
+
+    // Error messages
+    <string name="error_message_photo_remove_from_friend">Opps, somehow photo is not removed from friend\'s list</string>
+    <string name="error_message_photo_remove_from_favorite">Opps, somehow photo is not removed from favorite\'s list</string>
+    <string name="error_message_photo_remove_from_food">Opps, somehow photo is not removed from food\'s list</string>
+    <string name="error_message_photo_add_to_friend">Opps, somehow photo is not added to friend\'s list</string>
+    <string name="error_message_photo_add_to_favorite">Opps, somehow photo is not added to favorite\'s list</string>
+    <string name="error_message_photo_add_to_food">Opps, somehow photo is not added to food\'s list</string>
+
 </resources>

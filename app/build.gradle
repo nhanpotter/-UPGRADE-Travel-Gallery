@@ -8,6 +8,8 @@ apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle p
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin' // Safe Args Plugin
+
 android {
     dataBinding {
         enabled = true

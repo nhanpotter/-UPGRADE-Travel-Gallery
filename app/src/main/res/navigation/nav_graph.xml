@@ -21,7 +21,12 @@
         android:id="@+id/photosFragment"
         android:label="@string/photos"
         android:name="tech.ducletran.travelgalleryupgrade.photos.PhotosFragment"
-        tools:layout="@layout/fragment_photos"/>
+        tools:layout="@layout/fragment_photos">
+        <action
+            android:id="@+id/actionPhotosToPhotoDetail"
+            app:destination="@id/photoDetailsFragment"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
@@ -40,5 +45,16 @@
         android:label="@string/map"
         android:name="tech.ducletran.travelgalleryupgrade.map.MapFragment"
         tools:layout="@layout/fragment_map"/>
+
+    <fragment
+        android:id="@+id/photoDetailsFragment"
+        android:label="@string/photo"
+        android:name="tech.ducletran.travelgalleryupgrade.photodetails.PhotoDetailsFragment"
+        tools:layout="@layout/fragment_photo_details">
+        <argument
+            android:name="photoId"
+            app:argType="long"
+            android:defaultValue="-1L"/>
+    </fragment>
 
 </navigation>
