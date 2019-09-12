@@ -55,7 +55,7 @@ class PhotoDetailsViewModel(
     fun setFavorite(photoId: Long, isFavorite: Boolean) {
         if (photoId == -1L) return
 
-        compositeDisposable += photosService.setPhotoFriend(photoId, isFavorite)
+        compositeDisposable += photosService.setPhotoFavorite(photoId, isFavorite)
             .getDefaultSchedulers()
             .subscribe({
                 message.value = if (isFavorite) resource.getString(R.string.message_photo_added_to_favorite) else
@@ -70,7 +70,7 @@ class PhotoDetailsViewModel(
     fun setFood(photoId: Long, isFood: Boolean) {
         if (photoId == -1L) return
 
-        compositeDisposable += photosService.setPhotoFriend(photoId, isFood)
+        compositeDisposable += photosService.setPhotoFood(photoId, isFood)
             .getDefaultSchedulers()
             .subscribe({
                 message.value = if (isFood) resource.getString(R.string.message_photo_added_to_food) else

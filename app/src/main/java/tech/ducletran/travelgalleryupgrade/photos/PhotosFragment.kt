@@ -17,7 +17,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_photos.view.emptyView
 import kotlinx.android.synthetic.main.fragment_photos.view.photoGrids
-import kotlinx.android.synthetic.main.fragment_photos.view.loadingLayout
 import kotlinx.android.synthetic.main.fragment_photos.view.loadPhotosButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
@@ -53,20 +52,6 @@ class PhotosFragment : Fragment() {
                 photosAdapter.addPhotos(it)
                 rootView.emptyView.isVisible = it.isEmpty()
             })
-
-        photosViewModel.loading
-            .nonNull()
-            .observe(viewLifecycleOwner, Observer {
-                showLoadingDialog(it)
-            })
-
-        val currentPhotos = photosViewModel.photos.value
-        if (currentPhotos == null)
-            photosViewModel.loadAllPhotos()
-        else {
-            photosAdapter.addPhotos(currentPhotos)
-            rootView.emptyView.isVisible = currentPhotos.isEmpty()
-        }
 
         return rootView
     }
@@ -159,10 +144,5 @@ class PhotosFragment : Fragment() {
         intent.action = Intent.ACTION_OPEN_DOCUMENT
         startActivityForResult(
             Intent.createChooser(intent, "Select Photos"), PICK_PHOTO_REQUEST_CODE)
-    }
-
-    private fun showLoadingDialog(show: Boolean) {
-        rootView.loadingLayout.isVisible = show
-        rootView.loadPhotosButton.isVisible = !show
     }
 }

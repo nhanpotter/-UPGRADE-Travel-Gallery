@@ -1,15 +1,17 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
+import androidx.lifecycle.LiveData
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
 class PhotosService(
     private val photosDao: PhotosDao
 ) {
-    fun loadAllPhotos(): Flowable<List<Photo>> = photosDao.getAllPhotos()
+    fun loadAllPhotos(): LiveData<List<Photo>> = photosDao.getAllPhotos()
 
-    fun addPhotos(photos: List<Photo>): Completable =
-            photosDao.insertPhotos(photos)
+    suspend fun addPhotos(photos: List<Photo>) {
+        photosDao.insertPhotos(photos)
+    }
 
     fun loadPhoto(photoId: Long): Flowable<Photo> = photosDao.getPhotoById(photoId)
 

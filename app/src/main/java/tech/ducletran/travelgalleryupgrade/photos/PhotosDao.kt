@@ -1,5 +1,6 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.OnConflictStrategy
@@ -12,7 +13,7 @@ import io.reactivex.Flowable
 interface PhotosDao {
 
     @Query("SELECT * FROM photo")
-    fun getAllPhotos(): Flowable<List<Photo>>
+    fun getAllPhotos(): LiveData<List<Photo>>
 
     @Query("SELECT * FROM photo WHERE id = :id")
     fun getPhotoById(id: Long): Flowable<Photo>
@@ -24,10 +25,10 @@ interface PhotosDao {
     fun deleteAllPhotos(photos: List<Photo>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPhoto(photo: Photo)
+    suspend fun insertPhoto(photo: Photo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPhotos(photos: List<Photo>): Completable
+    suspend fun insertPhotos(photos: List<Photo>)
 
     @Query("UPDATE photo SET isFavorite = :isFavorite WHERE id = :photoId")
     fun setFavorite(photoId: Long, isFavorite: Boolean): Completable
