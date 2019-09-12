@@ -31,11 +31,11 @@ interface PhotosDao {
     suspend fun insertPhotos(photos: List<Photo>)
 
     @Query("UPDATE photo SET isFavorite = :isFavorite WHERE id = :photoId")
-    fun setFavorite(photoId: Long, isFavorite: Boolean): Completable
+    suspend fun setFavorite(photoId: Long, isFavorite: Boolean)
 
     @Query("UPDATE photo SET isFood = :isFood WHERE id = :photoId")
-    fun setFood(photoId: Long, isFood: Boolean): Completable
+    suspend fun setFood(photoId: Long, isFood: Boolean)
 
     @Query("UPDATE photo SET isFriend = :isFriend WHERE id = :photoId")
-    fun setFriend(photoId: Long, isFriend: Boolean): Completable
+    suspend fun setFriend(photoId: Long, isFriend: Boolean)
 }

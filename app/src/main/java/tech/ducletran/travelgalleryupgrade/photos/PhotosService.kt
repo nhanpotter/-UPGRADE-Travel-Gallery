@@ -1,7 +1,6 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
 import androidx.lifecycle.LiveData
-import io.reactivex.Completable
 import io.reactivex.Flowable
 
 class PhotosService(
@@ -15,12 +14,12 @@ class PhotosService(
 
     fun loadPhoto(photoId: Long): Flowable<Photo> = photosDao.getPhotoById(photoId)
 
-    fun setPhotoFavorite(photoId: Long, isFavorite: Boolean): Completable =
+    suspend fun setPhotoFavorite(photoId: Long, isFavorite: Boolean) =
             photosDao.setFavorite(photoId, isFavorite)
 
-    fun setPhotoFood(photoId: Long, isFood: Boolean): Completable =
+    suspend fun setPhotoFood(photoId: Long, isFood: Boolean) =
             photosDao.setFood(photoId, isFood)
 
-    fun setPhotoFriend(photoId: Long, isFriend: Boolean): Completable =
+    suspend fun setPhotoFriend(photoId: Long, isFriend: Boolean) =
             photosDao.setFriend(photoId, isFriend)
 }

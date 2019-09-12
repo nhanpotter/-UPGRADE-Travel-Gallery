@@ -3,8 +3,10 @@ package tech.ducletran.travelgalleryupgrade.photodetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
+import kotlinx.coroutines.launch
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.ext.getDefaultSchedulers
 import tech.ducletran.travelgalleryupgrade.photos.Photo
@@ -37,49 +39,22 @@ class PhotoDetailsViewModel(
             })
     }
 
-    fun setFriend(photoId: Long, isFriend: Boolean) {
-        if (photoId == -1L) return
+    fun setFriend(photoId: Long, isFriend: Boolean) = viewModelScope.launch {
+            photosService.setPhotoFriend(photoId, isFriend)
+            message.value = if (isFriend) resource.getString(R.string.message_photo_added_to_friend) else
+                resource.getString(R.string.message_photo_removed_from_friend)
+        }
 
-        compositeDisposable += photosService.setPhotoFriend(photoId, isFriend)
-            .getDefaultSchedulers()
-            .subscribe({
-                message.value = if (isFriend) resource.getString(R.string.message_photo_added_to_friend) else
-                    resource.getString(R.string.message_photo_removed_from_friend)
-            }, {
-                message.value = if (isFriend) resource.getString(R.string.error_message_photo_add_to_friend) else
-                    resource.getString(R.string.error_message_photo_remove_from_friend)
-                Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFriend")
-            })
+    fun setFavorite(photoId: Long, isFavorite: Boolean) = viewModelScope.launch {
+        photosService.setPhotoFavorite(photoId, isFavorite)
+        message.value = if (isFavorite) resource.getString(R.string.message_photo_added_to_favorite) else
+            resource.getString(R.string.message_photo_removed_from_favorite)
     }
 
-    fun setFavorite(photoId: Long, isFavorite: Boolean) {
-        if (photoId == -1L) return
-
-        compositeDisposable += photosService.setPhotoFavorite(photoId, isFavorite)
-            .getDefaultSchedulers()
-            .subscribe({
-                message.value = if (isFavorite) resource.getString(R.string.message_photo_added_to_favorite) else
-                    resource.getString(R.string.message_photo_removed_from_favorite)
-            }, {
-                message.value = if (isFavorite) resource.getString(R.string.error_message_photo_add_to_favorite) else
-                    resource.getString(R.string.error_message_photo_remove_from_favorite)
-                Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFavorite")
-            })
-    }
-
-    fun setFood(photoId: Long, isFood: Boolean) {
-        if (photoId == -1L) return
-
-        compositeDisposable += photosService.setPhotoFood(photoId, isFood)
-            .getDefaultSchedulers()
-            .subscribe({
-                message.value = if (isFood) resource.getString(R.string.message_photo_added_to_food) else
-                    resource.getString(R.string.message_photo_removed_from_food)
-            }, {
-                message.value = if (isFood) resource.getString(R.string.error_message_photo_add_to_food) else
-                    resource.getString(R.string.error_message_photo_remove_from_food)
-                Timber.e(it, "Error setting photo with ID $photoId for friend feature $isFood")
-            })
+    fun setFood(photoId: Long, isFood: Boolean) = viewModelScope.launch {
+        photosService.setPhotoFood(photoId, isFood)
+        message.value = if (isFood) resource.getString(R.string.message_photo_added_to_food) else
+            resource.getString(R.string.message_photo_removed_from_food)
     }
 
     override fun onCleared() {

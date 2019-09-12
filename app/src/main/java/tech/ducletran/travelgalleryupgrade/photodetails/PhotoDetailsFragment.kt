@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.MenuItem
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -12,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_photo_details.view.photo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
+import tech.ducletran.travelgalleryupgrade.photos.Photo
 
 class PhotoDetailsFragment : Fragment() {
 
@@ -19,11 +23,17 @@ class PhotoDetailsFragment : Fragment() {
     private lateinit var rootView: View
     private val safeArgs: PhotoDetailsFragmentArgs by navArgs()
 
+    private lateinit var peopleMenuItem: MenuItem
+    private lateinit var foodMenuItem: MenuItem
+    private lateinit var favoriteMenuItem: MenuItem
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         rootView = inflater.inflate(R.layout.fragment_photo_details, container, false)
 
         photoDetailsViewModel.message
@@ -33,20 +43,59 @@ class PhotoDetailsFragment : Fragment() {
         photoDetailsViewModel.photo
             .nonNull()
             .observe(viewLifecycleOwner, Observer {
-                Glide.with(requireContext())
-                    .load(it.url)
-                    .into(rootView.photo)
+                setPhotoUI(it)
             })
 
         val currentPhoto = photoDetailsViewModel.photo.value
         if (currentPhoto == null) {
             photoDetailsViewModel.loadPhoto(safeArgs.photoId)
         } else {
-            Glide.with(requireContext())
-                .load(currentPhoto.url)
-                .into(rootView.photo)
+            setPhotoUI(currentPhoto)
         }
 
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_photo_details, menu)
+        peopleMenuItem = menu.findItem(R.id.actionPeople)
+        favoriteMenuItem = menu.findItem(R.id.actionFavorite)
+        foodMenuItem = menu.findItem(R.id.actionFood)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.actionFavorite -> {
+                photoDetailsViewModel.photo.value?.let {
+                    photoDetailsViewModel.setFavorite(it.id, !it.isFavorite)
+                }
+                true
+            }
+            R.id.actionFood -> {
+                photoDetailsViewModel.photo.value?.let {
+                    photoDetailsViewModel.setFood(it.id, !it.isFood)
+                }
+                true
+            }
+            R.id.actionPeople -> {
+                photoDetailsViewModel.photo.value?.let {
+                    photoDetailsViewModel.setFriend(it.id, !it.isFriend)
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setPhotoUI(photo: Photo) {
+        Glide.with(requireContext())
+            .load(photo.url)
+            .into(rootView.photo)
+        peopleMenuItem.icon = resources.getDrawable(
+            if (photo.isFriend) R.drawable.ic_people_filled else R.drawable.ic_people)
+        favoriteMenuItem.icon = resources.getDrawable(
+            if (photo.isFavorite) R.drawable.ic_favorite_filled else R.drawable.ic_favorite)
+        foodMenuItem.icon = resources.getDrawable(
+            if (photo.isFood) R.drawable.ic_food_filled else R.drawable.ic_food)
     }
 }

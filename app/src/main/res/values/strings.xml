@@ -24,5 +24,8 @@
     <string name="error_message_photo_add_to_friend">Opps, somehow photo is not added to friend\'s list</string>
     <string name="error_message_photo_add_to_favorite">Opps, somehow photo is not added to favorite\'s list</string>
     <string name="error_message_photo_add_to_food">Opps, somehow photo is not added to food\'s list</string>
+    <string name="favorite">Favorite</string>
+    <string name="food">Food</string>
+    <string name="people">People</string>
 
 </resources>
