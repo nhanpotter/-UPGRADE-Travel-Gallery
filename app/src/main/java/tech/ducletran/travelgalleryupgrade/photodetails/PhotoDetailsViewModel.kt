@@ -17,6 +17,10 @@ class PhotoDetailsViewModel(
 
     fun loadPhoto(photoId: Long) = photosService.loadPhoto(photoId)
 
+    fun removePhoto(photoId: Long) = viewModelScope.launch {
+        photosService.removePhoto(photoId)
+    }
+
     fun setFriend(photoId: Long, isFriend: Boolean) = viewModelScope.launch {
         photosService.setPhotoFriend(photoId, isFriend)
         message.value = if (isFriend) resource.getString(R.string.message_photo_added_to_friend) else

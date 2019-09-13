@@ -33,5 +33,7 @@
     <string name="main_information">Main Information</string>
     <string name="location">Location</string>
     <string name="photo_information">Photo Information</string>
+    <string name="remove_photo">Remove Photo</string>
+    <string name="use_as">Use As</string>
 
 </resources>

@@ -29,6 +29,13 @@
         android:paddingStart="@dimen/padding_large"
         android:paddingEnd="@dimen/padding_large">
         <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:src="@drawable/ic_share"/>
+        <ImageButton
             android:id="@+id/favoriteButton"
             android:layout_weight="1"
             android:layout_width="0dp"

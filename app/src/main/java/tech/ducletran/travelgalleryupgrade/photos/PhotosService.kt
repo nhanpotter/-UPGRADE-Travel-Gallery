@@ -14,6 +14,8 @@ class PhotosService(
 
     fun loadPhoto(photoId: Long) = photosDao.getPhotoById(photoId)
 
+    suspend fun removePhoto(photoId: Long) = photosDao.deletePhoto(photoId)
+
     suspend fun setPhotoFavorite(photoId: Long, isFavorite: Boolean) =
             photosDao.setFavorite(photoId, isFavorite)
 

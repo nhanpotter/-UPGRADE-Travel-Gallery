@@ -1,9 +1,9 @@
 package tech.ducletran.travelgalleryupgrade.photodetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_photo_details.view.favoriteButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.infoButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.friendButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.foodButton
+import kotlinx.android.synthetic.main.fragment_photo_details.view.shareButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.databinding.FragmentPhotoDetailsBinding
@@ -54,9 +55,23 @@ class PhotoDetailsFragment : Fragment() {
         return rootView
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_photo_details, menu)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        rootView.shareButton.setOnClickListener {
+            val shareImageIntent = Intent()
+            with(shareImageIntent) {
+                action = Intent.ACTION_SEND
+                type = "image/*"
+                putExtra(Intent.EXTRA_STREAM, Uri.parse(photo.url))
+                startActivity(Intent.createChooser(this, "Share Image"))
+            }
+        }
         rootView.infoButton.setOnClickListener {
             findNavController(rootView).navigate(PhotoDetailsFragmentDirections
                 .actionPhotoDetailsToPhotoInfo(safeArgs.photoId))
@@ -69,6 +84,28 @@ class PhotoDetailsFragment : Fragment() {
         }
         rootView.foodButton.setOnClickListener {
             photoDetailsViewModel.setFood(safeArgs.photoId, !photo.isFood)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.actionRemovePhoto -> {
+                photoDetailsViewModel.removePhoto(safeArgs.photoId)
+                activity?.onBackPressed()
+                true
+            }
+            R.id.actionUseAsPhoto -> {
+                val usePhotoIntent = Intent()
+                with(usePhotoIntent) {
+                    action = Intent.ACTION_ATTACH_DATA
+                    type = "image/*"
+                    addCategory(Intent.CATEGORY_DEFAULT)
+                    putExtra(Intent.EXTRA_STREAM, Uri.parse(photo.url))
+                    startActivity(Intent.createChooser(this, "Set As"))
+                }
+                true
+            }
+            else ->super.onOptionsItemSelected(item)
         }
     }
 }

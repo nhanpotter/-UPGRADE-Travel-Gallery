@@ -16,11 +16,8 @@ interface PhotosDao {
     @Query("SELECT * FROM photo WHERE id = :id")
     fun getPhotoById(id: Long): LiveData<Photo>
 
-    @Delete
-    fun deletePhoto(photo: Photo)
-
-    @Delete
-    fun deleteAllPhotos(photos: List<Photo>)
+    @Query("DELETE FROM photo WHERE id = :photoId")
+    suspend fun deletePhoto(photoId: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPhoto(photo: Photo)
