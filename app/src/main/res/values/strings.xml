@@ -16,6 +16,9 @@
     <string name="message_photo_removed_from_friend">This photo is removed from friend\'s list</string>
     <string name="message_photo_removed_from_favorite">This photo is removed from favorite\'s list</string>
     <string name="message_photo_removed_from_food">This photo is removed from food\'s list</string>
+    <string name="message_empty_view_photos">Let\'s add some travel photos to the app</string>
+    <string name="message_empty_view_albums">Let\'s create an album to store photos</string>
+    <string name="message_empty_view_travel_lists">Let\'s add some travel location to the wish list</string>
 
     // Error messages
     <string name="error_message_photo_remove_from_friend">Opps, somehow photo is not removed from friend\'s list</string>
