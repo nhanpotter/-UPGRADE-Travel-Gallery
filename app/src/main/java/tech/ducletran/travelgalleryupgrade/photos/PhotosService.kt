@@ -12,7 +12,7 @@ class PhotosService(
         photosDao.insertPhotos(photos)
     }
 
-    fun loadPhoto(photoId: Long): Flowable<Photo> = photosDao.getPhotoById(photoId)
+    fun loadPhoto(photoId: Long) = photosDao.getPhotoById(photoId)
 
     suspend fun setPhotoFavorite(photoId: Long, isFavorite: Boolean) =
             photosDao.setFavorite(photoId, isFavorite)

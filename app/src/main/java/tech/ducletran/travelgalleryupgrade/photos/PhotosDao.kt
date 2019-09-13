@@ -6,8 +6,6 @@ import androidx.room.Query
 import androidx.room.OnConflictStrategy
 import androidx.room.Delete
 import androidx.room.Insert
-import io.reactivex.Completable
-import io.reactivex.Flowable
 
 @Dao
 interface PhotosDao {
@@ -16,7 +14,7 @@ interface PhotosDao {
     fun getAllPhotos(): LiveData<List<Photo>>
 
     @Query("SELECT * FROM photo WHERE id = :id")
-    fun getPhotoById(id: Long): Flowable<Photo>
+    fun getPhotoById(id: Long): LiveData<Photo>
 
     @Delete
     fun deletePhoto(photo: Photo)

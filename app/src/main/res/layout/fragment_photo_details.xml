@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+    <variable
+        name="photo"
+        type="tech.ducletran.travelgalleryupgrade.photos.Photo" />
+</data>
+
+<FrameLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
     <ImageView
-        android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:photoUrl="@{photo.url}"
         android:scaleType="fitCenter" />
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomTaskLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/background_black_opacity"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large">
+        <ImageButton
+            android:id="@+id/favoriteButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:isPhotoFavorite="@{photo.favorite}"
+            tools:src="@drawable/ic_favorite"/>
+        <ImageButton
+            android:id="@+id/foodButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:isPhotoFood="@{photo.food}"
+            tools:src="@drawable/ic_food"/>
+        <ImageButton
+            android:id="@+id/friendButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:isPhotoFriend="@{photo.friend}"
+            tools:src="@drawable/ic_people"/>
+        <ImageButton
+            android:id="@+id/infoButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:src="@drawable/ic_info_outline"/>
+    </LinearLayout>
+</FrameLayout>
+</layout>

@@ -51,6 +51,20 @@
         android:label="@string/photo"
         android:name="tech.ducletran.travelgalleryupgrade.photodetails.PhotoDetailsFragment"
         tools:layout="@layout/fragment_photo_details">
+        <action
+            android:id="@+id/actionPhotoDetailsToPhotoInfo"
+            app:destination="@id/photoInfoFragment"/>
+        <argument
+            android:name="photoId"
+            app:argType="long"
+            android:defaultValue="-1L"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoInfoFragment"
+        android:label="@string/photo_information"
+        android:name="tech.ducletran.travelgalleryupgrade.photodetails.PhotoInfoFragment"
+        tools:layout="@layout/fragment_photo_info">
         <argument
             android:name="photoId"
             app:argType="long"

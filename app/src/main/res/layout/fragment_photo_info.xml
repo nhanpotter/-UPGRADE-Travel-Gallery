@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="photo"
+        type="tech.ducletran.travelgalleryupgrade.photos.Photo" />
+</data>
+
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleText"
+            android:text="@string/main_information"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{`Title: ` + photo.title}"
+            app:hideIfEmpty="@{photo.title}"
+            tools:text="Title: ducle.jpg"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{`Description: ` + photo.description}"
+            app:hideIfEmpty="@{photo.description}"
+            tools:text="Some description here"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{`Date Taken: ` + photo.dateTaken}"
+            app:hideIfEmpty="@{photo.dateTaken}"
+            tools:text="Date Taken: 11/11/2000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{`Dimensions: ` + photo.width + `x` + photo.height}"
+            hideIfEmpty="@{photo.width}"
+            tools:text="Dimensions: 100px . 200px"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@{`Size: ` + photo.size + `MB`}"
+            app:hideIfEmpty="@{photo.size}"
+            tools:text="Size: 100MB"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleText"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@string/location"/>
+
+        <ImageView
+            android:id="@+id/previewMap"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:latitude="@{photo.latitude}"
+            app:longitude="@{photo.longitude}"
+            android:background="?selectableItemBackground"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+</layout>

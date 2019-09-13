@@ -27,5 +27,8 @@
     <string name="favorite">Favorite</string>
     <string name="food">Food</string>
     <string name="people">People</string>
+    <string name="main_information">Main Information</string>
+    <string name="location">Location</string>
+    <string name="photo_information">Photo Information</string>
 
 </resources>
