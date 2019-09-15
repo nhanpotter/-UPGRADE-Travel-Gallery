@@ -17,9 +17,9 @@ import tech.ducletran.travelgalleryupgrade.databinding.FragmentPhotoInfoBinding
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 import tech.ducletran.travelgalleryupgrade.photos.Photo
 
-class PhotoInfoFragment: Fragment() {
+class PhotoInfoFragment : Fragment() {
 
-    private val photoDetailsViewModel  by viewModel<PhotoDetailsViewModel>()
+    private val photoDetailsViewModel by viewModel<PhotoDetailsViewModel>()
     private lateinit var rootView: View
     private lateinit var binding: FragmentPhotoInfoBinding
     private val safeArgs: PhotoInfoFragmentArgs by navArgs()

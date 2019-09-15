@@ -1,9 +1,8 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
 import androidx.lifecycle.LiveData
-import io.reactivex.Flowable
 
-class PhotosService(
+class PhotosRepo(
     private val photosDao: PhotosDao
 ) {
     fun loadAllPhotos(): LiveData<List<Photo>> = photosDao.getAllPhotos()
@@ -13,6 +12,12 @@ class PhotosService(
     }
 
     fun loadPhoto(photoId: Long) = photosDao.getPhotoById(photoId)
+
+    fun loadFavoritePhotos() = photosDao.getFavoritePhotos()
+
+    fun loadFriendPhotos() = photosDao.getFriendPhotos()
+
+    fun loadFoodPhotos() = photosDao.getFoodPhotos()
 
     suspend fun removePhoto(photoId: Long) = photosDao.deletePhoto(photoId)
 

@@ -22,6 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 import tech.ducletran.travelgalleryupgrade.ext.notNull
+import tech.ducletran.travelgalleryupgrade.ext.snackbar
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLatitude
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLongitude
 
@@ -42,8 +43,7 @@ class PhotosFragment : Fragment() {
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_photos, container, false)
 
-        val layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
-        rootView.photoGrids.layoutManager = layoutManager
+        rootView.photoGrids.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         rootView.photoGrids.adapter = photosAdapter
 
         photosViewModel.photos
@@ -51,6 +51,11 @@ class PhotosFragment : Fragment() {
             .observe(viewLifecycleOwner, Observer {
                 photosAdapter.addPhotos(it)
                 rootView.emptyView.isVisible = it.isEmpty()
+            })
+
+        photosViewModel.message
+            .observe(viewLifecycleOwner, Observer {
+                rootView.snackbar(it)
             })
 
         return rootView

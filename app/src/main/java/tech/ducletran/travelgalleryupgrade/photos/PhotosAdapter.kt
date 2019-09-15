@@ -1,12 +1,9 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_photo.view.photo
-import tech.ducletran.travelgalleryupgrade.R
+import tech.ducletran.travelgalleryupgrade.databinding.ItemPhotoBinding
 
 class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
     private val photos = mutableListOf<Photo>()
@@ -23,8 +20,9 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_photo, parent, false)
-        return PhotosViewHolder(view)
+        val binding = ItemPhotoBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false)
+        return PhotosViewHolder(binding)
     }
 
     override fun getItemCount(): Int = photos.size
@@ -34,12 +32,11 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
     }
 }
 
-class PhotosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PhotosViewHolder(private val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(photo: Photo, onPhotoClicked: PhotoClickListener?) {
-        Glide.with(itemView.context)
-            .load(photo.url)
-            .into(itemView.photo)
+        binding.photo = photo
+        binding.executePendingBindings()
 
         itemView.setOnClickListener {
             onPhotoClicked?.onPhotoClicked(photo.id)

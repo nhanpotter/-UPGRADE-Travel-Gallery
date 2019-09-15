@@ -42,6 +42,7 @@
             android:layout_height="match_parent"
             style="@style/Widget.AppCompat.Button.Borderless"
             app:isPhotoFavorite="@{photo.favorite}"
+            android:tint="@android:color/white"
             tools:src="@drawable/ic_favorite"/>
         <ImageButton
             android:id="@+id/foodButton"
@@ -50,6 +51,7 @@
             android:layout_height="match_parent"
             style="@style/Widget.AppCompat.Button.Borderless"
             app:isPhotoFood="@{photo.food}"
+            android:tint="@android:color/white"
             tools:src="@drawable/ic_food"/>
         <ImageButton
             android:id="@+id/friendButton"
@@ -58,6 +60,7 @@
             android:layout_height="match_parent"
             style="@style/Widget.AppCompat.Button.Borderless"
             app:isPhotoFriend="@{photo.friend}"
+            android:tint="@android:color/white"
             tools:src="@drawable/ic_people"/>
         <ImageButton
             android:id="@+id/infoButton"

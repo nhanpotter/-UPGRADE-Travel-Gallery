@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="photo"
+        type="tech.ducletran.travelgalleryupgrade.photos.Photo" />
+</data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,14 +14,15 @@
     android:background="?android:selectableItemBackground">
 
     <ImageView
-        android:id="@+id/photo"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:background="?android:selectableItemBackground"
+        photoUrl="@{photo.url}"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

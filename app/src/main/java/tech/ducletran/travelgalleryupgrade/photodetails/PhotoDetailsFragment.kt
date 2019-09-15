@@ -3,13 +3,17 @@ package tech.ducletran.travelgalleryupgrade.photodetails
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_photo_details.view.favoriteButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.infoButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.friendButton
@@ -19,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.databinding.FragmentPhotoDetailsBinding
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
+import tech.ducletran.travelgalleryupgrade.ext.snackbar
 import tech.ducletran.travelgalleryupgrade.photos.Photo
 
 class PhotoDetailsFragment : Fragment() {
@@ -41,7 +46,7 @@ class PhotoDetailsFragment : Fragment() {
 
         photoDetailsViewModel.message
             .observe(viewLifecycleOwner, Observer {
-                Snackbar.make(rootView, it, Snackbar.LENGTH_SHORT)
+                rootView.snackbar(it)
             })
 
         photoDetailsViewModel.loadPhoto(safeArgs.photoId)
@@ -105,7 +110,7 @@ class PhotoDetailsFragment : Fragment() {
                 }
                 true
             }
-            else ->super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

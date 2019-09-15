@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.OnConflictStrategy
-import androidx.room.Delete
 import androidx.room.Insert
 
 @Dao
@@ -33,4 +32,13 @@ interface PhotosDao {
 
     @Query("UPDATE photo SET isFriend = :isFriend WHERE id = :photoId")
     suspend fun setFriend(photoId: Long, isFriend: Boolean)
+
+    @Query("SELECT * FROM photo WHERE isFavorite = 1")
+    fun getFavoritePhotos(): LiveData<List<Photo>>
+
+    @Query("SELECT * FROM photo WHERE isFood = 1")
+    fun getFoodPhotos(): LiveData<List<Photo>>
+
+    @Query("SELECT * FROM photo WHERE isFriend = 1")
+    fun getFriendPhotos(): LiveData<List<Photo>>
 }

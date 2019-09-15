@@ -17,6 +17,7 @@
     <string name="message_photo_removed_from_favorite">This photo is removed from favorite\'s list</string>
     <string name="message_photo_removed_from_food">This photo is removed from food\'s list</string>
     <string name="message_empty_view_photos">Let\'s add some travel photos to the app</string>
+    <string name="message_empty_view_album_details">There is no photo. Let\'s add some travel photos to this album</string>
     <string name="message_empty_view_albums">Let\'s create an album to store photos</string>
     <string name="message_empty_view_travel_lists">Let\'s add some travel location to the wish list</string>
 
@@ -35,5 +36,8 @@
     <string name="photo_information">Photo Information</string>
     <string name="remove_photo">Remove Photo</string>
     <string name="use_as">Use As</string>
+    <string name="others">Others</string>
+    <string name="new_album">New Album</string>
+    <string name="album_details">Album Details</string>
 
 </resources>

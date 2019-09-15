@@ -5,17 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
+import tech.ducletran.travelgalleryupgrade.utils.SingleLiveEvent
 
 class PhotosViewModel(
-    private val photosService: PhotosService
+    private val photosRepo: PhotosRepo
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
+    val message = SingleLiveEvent<String>()
 
-    val photos: LiveData<List<Photo>> = photosService.loadAllPhotos()
+    val photos: LiveData<List<Photo>> = photosRepo.loadAllPhotos()
 
     fun addPhotos(photos: List<Photo>) = viewModelScope.launch {
-        photosService.addPhotos(photos)
+        photosRepo.addPhotos(photos)
+        message.value = "${photos.size} photos added!"
     }
 
     override fun onCleared() {
