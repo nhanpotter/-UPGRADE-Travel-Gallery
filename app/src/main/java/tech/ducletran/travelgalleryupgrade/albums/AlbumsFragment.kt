@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_albums.view.friendAlbum
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
+import tech.ducletran.travelgalleryupgrade.ext.snackbar
 
 class AlbumsFragment : Fragment() {
 
@@ -49,6 +50,11 @@ class AlbumsFragment : Fragment() {
                 othersAlbumAdapter.addAlbums(othersAlbum)
                 locationAlbumAdapter.addAlbums(locationsAlbum)
                 handleAlbumsVisibility(locationsAlbum, othersAlbum)
+            })
+
+        albumsViewModel.message
+            .observe(viewLifecycleOwner, Observer {
+                rootView.snackbar(it)
             })
 
         return rootView
@@ -86,5 +92,6 @@ class AlbumsFragment : Fragment() {
     }
 
     private fun createNewAlbum() {
+        findNavController(rootView).navigate(AlbumsFragmentDirections.actionAlbumsToAlbumNew())
     }
 }

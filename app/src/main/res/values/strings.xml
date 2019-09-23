@@ -28,6 +28,9 @@
     <string name="error_message_photo_add_to_friend">Opps, somehow photo is not added to friend\'s list</string>
     <string name="error_message_photo_add_to_favorite">Opps, somehow photo is not added to favorite\'s list</string>
     <string name="error_message_photo_add_to_food">Opps, somehow photo is not added to food\'s list</string>
+    <string name="message_delete_album">Deleting this album is permanent. Photos that were in this album remain in the app</string>
+
+    <string name="preview_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="favorite">Favorite</string>
     <string name="food">Food</string>
     <string name="people">People</string>
@@ -39,5 +42,24 @@
     <string name="others">Others</string>
     <string name="new_album">New Album</string>
     <string name="album_details">Album Details</string>
+    <string name="edit_album">Edit Album</string>
+    <string name="delete_album">Delete Album</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="description_favorite_album">My collection of favorite photos around the world</string>
+    <string name="description_food_album">My collection of food I tried around the world</string>
+    <string name="description_people_album">My collection of people I met around the world</string>
+    <string name="delete_this_album">Delete this album?</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_string">Continue</string>
+    <string name="creating_new_album">Creating New Album</string>
+    <string name="album_name">Album Name</string>
+    <string name="album_description">Album Description</string>
+    <string name="album_overview">Album Overview</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="no_location_selected">No Location Selected</string>
+    <string name="new_update_album">New/Update Album</string>
+    <string name="updating_album">Updating Album</string>
+    <string name="error_message_empty_album_name">Album name cannot be empty</string>
+    <string name="error_message_no_album_type_selected">Select an album type</string>
 
 </resources>

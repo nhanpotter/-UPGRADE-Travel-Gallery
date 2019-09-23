@@ -15,5 +15,6 @@
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="album_card_size_medium">150dp</dimen>
     <dimen name="album_card_size_small">100dp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
 
 </resources>

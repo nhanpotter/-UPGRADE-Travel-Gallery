@@ -10,15 +10,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:background="?android:selectableItemBackground">
+    android:layout_width="match_parent">
 
     <ImageView
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:background="?android:selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         photoUrl="@{photo.url}"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent"

@@ -28,6 +28,12 @@ interface AlbumsDao {
     @Query("DELETE FROM album WHERE id = :albumId")
     suspend fun removeAlbum(albumId: Long)
 
+    @Query("DELETE FROM albumandphoto WHERE albumId = :albumId")
+    suspend fun removeAlbumAndPhoto(albumId: Long)
+
     @Query("SELECT * FROM album")
     fun getAllAlbums(): LiveData<List<Album>>
+
+    @Query("SELECT * FROM album WHERE id = :albumId")
+    fun getAlbumById(albumId: Long): LiveData<Album>
 }

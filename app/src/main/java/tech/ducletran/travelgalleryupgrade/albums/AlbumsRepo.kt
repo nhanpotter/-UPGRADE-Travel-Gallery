@@ -10,7 +10,10 @@ class AlbumsRepo(
 
     suspend fun updateAlbum(album: Album) = albumsDao.updateAlbum(album)
 
-    suspend fun removeAlbum(albumId: Long) = albumsDao.removeAlbum(albumId)
+    suspend fun removeAlbum(albumId: Long) {
+        albumsDao.removeAlbum(albumId)
+        albumsDao.removeAlbumAndPhoto(albumId)
+    }
 
     suspend fun removePhotoFromAlbum(photoId: Long, albumId: Long) =
             albumsDao.removePhotoFromAlbum(photoId, albumId)
@@ -23,4 +26,6 @@ class AlbumsRepo(
     fun getPhotosFromAlbum(albumId: Long) = albumsDao.getPhotosFromAlbum(albumId)
 
     fun getAllAlbums() = albumsDao.getAllAlbums()
+
+    fun getAlbumById(albumId: Long) = albumsDao.getAlbumById(albumId)
 }

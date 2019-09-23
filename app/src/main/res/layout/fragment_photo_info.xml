@@ -86,7 +86,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             app:latitude="@{photo.latitude}"
             app:longitude="@{photo.longitude}"
-            android:background="?selectableItemBackground"/>
+            android:foreground="?selectableItemBackground"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
