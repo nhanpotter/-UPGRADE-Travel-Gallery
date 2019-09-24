@@ -8,13 +8,16 @@ import tech.ducletran.travelgalleryupgrade.BaseDatabase
 import tech.ducletran.travelgalleryupgrade.albums.AlbumNewUpdateViewModel
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsRepo
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsViewModel
+import tech.ducletran.travelgalleryupgrade.customclass.Preference
 import tech.ducletran.travelgalleryupgrade.photodetails.PhotoDetailsViewModel
 import tech.ducletran.travelgalleryupgrade.photos.PhotosRepo
 import tech.ducletran.travelgalleryupgrade.photos.PhotosViewModel
-import tech.ducletran.travelgalleryupgrade.utils.Resource
+import tech.ducletran.travelgalleryupgrade.customclass.Resource
+import tech.ducletran.travelgalleryupgrade.location.LocationViewModel
 
 val commonModule = module {
     single { Resource() }
+    single { Preference() }
 }
 
 val singletonModule = module {
@@ -45,4 +48,5 @@ val viewModelModule = module {
     viewModel { PhotoDetailsViewModel(get(), get()) }
     viewModel { AlbumsViewModel(get(), get(), get()) }
     viewModel { AlbumNewUpdateViewModel(get(), get(), get()) }
+    viewModel { LocationViewModel(get()) }
 }

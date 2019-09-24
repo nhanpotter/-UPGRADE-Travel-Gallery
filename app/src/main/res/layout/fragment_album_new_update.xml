@@ -92,8 +92,8 @@
                 android:id="@+id/chooseLocationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_location"
-                android:background="@android:color/transparent"/>
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="@string/choose_location"/>
             <TextView
                 android:id="@+id/location"
                 android:layout_width="match_parent"

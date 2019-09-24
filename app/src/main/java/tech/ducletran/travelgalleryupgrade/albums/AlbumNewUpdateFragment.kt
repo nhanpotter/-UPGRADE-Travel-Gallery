@@ -31,10 +31,12 @@ import kotlinx.android.synthetic.main.fragment_album_new_update.view.coverImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.customclass.GridSpacingItemDecoration
+import tech.ducletran.travelgalleryupgrade.customclass.Preference
 import tech.ducletran.travelgalleryupgrade.ext.hideKeyboard
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 import tech.ducletran.travelgalleryupgrade.ext.notNull
 import tech.ducletran.travelgalleryupgrade.ext.snackbar
+import tech.ducletran.travelgalleryupgrade.location.LOCATION
 import tech.ducletran.travelgalleryupgrade.photos.PhotoClickListener
 import tech.ducletran.travelgalleryupgrade.photos.PhotosAdapter
 
@@ -44,6 +46,7 @@ class AlbumNewUpdateFragment : Fragment() {
     private val safeArgs: AlbumNewUpdateFragmentArgs by navArgs()
     private val albumNewUpdateViewModel by viewModel<AlbumNewUpdateViewModel>()
     private lateinit var album: Album
+    private val preference = Preference()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +77,11 @@ class AlbumNewUpdateFragment : Fragment() {
                     .into(rootView.coverImage)
             })
 
+        if (!preference.getString(LOCATION).isNullOrEmpty()) {
+            rootView.location.text = preference.getString(LOCATION)
+            preference.putString(LOCATION, null)
+        }
+
         if (safeArgs.albumId != -1L) {
             rootView.title.text = getString(R.string.updating_album)
             albumNewUpdateViewModel.getAlbumById(safeArgs.albumId)
@@ -91,6 +99,8 @@ class AlbumNewUpdateFragment : Fragment() {
                         R.id.othersRadioButton else R.id.locationRadioButton)
                 })
         }
+
+        rootView.name.isEnabled = !rootView.locationRadioButton.isChecked
 
         Glide.with(requireContext())
             .load(albumNewUpdateViewModel.coverImage.value)
@@ -121,9 +131,11 @@ class AlbumNewUpdateFragment : Fragment() {
             when (id) {
                 R.id.locationRadioButton -> {
                     rootView.locationLayout.isVisible = true
+                    rootView.name.isEnabled = false
                 }
                 R.id.othersRadioButton -> {
                     rootView.locationLayout.isVisible = false
+                    rootView.name.isEnabled = true
                 }
             }
         }
@@ -217,6 +229,9 @@ class AlbumNewUpdateFragment : Fragment() {
         if (!rootView.locationRadioButton.isChecked && !rootView.othersRadioButton.isChecked) {
             rootView.locationRadioButton.error = getString(R.string.error_message_no_album_type_selected)
             valid = false
+        }
+        if (rootView.locationRadioButton.isChecked && rootView.location.text == getString(R.string.no_location_selected)) {
+            rootView.snackbar(getString(R.string.message_select_location_for_album))
         }
         return valid
     }

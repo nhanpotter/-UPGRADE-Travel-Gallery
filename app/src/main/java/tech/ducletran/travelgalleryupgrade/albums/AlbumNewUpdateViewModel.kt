@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import tech.ducletran.travelgalleryupgrade.photos.PhotosRepo
-import tech.ducletran.travelgalleryupgrade.utils.Resource
-import tech.ducletran.travelgalleryupgrade.utils.SingleLiveEvent
+import tech.ducletran.travelgalleryupgrade.customclass.Resource
+import tech.ducletran.travelgalleryupgrade.customclass.SingleLiveEvent
 
 class AlbumNewUpdateViewModel(
     private val photosRepo: PhotosRepo,

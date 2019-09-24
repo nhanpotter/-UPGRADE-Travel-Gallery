@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
-import tech.ducletran.travelgalleryupgrade.utils.SingleLiveEvent
+import tech.ducletran.travelgalleryupgrade.customclass.SingleLiveEvent
 
 class PhotosViewModel(
     private val photosRepo: PhotosRepo

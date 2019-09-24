@@ -61,6 +61,7 @@ dependencies {
     def coroutines_version = "1.2.0"
     def ktx_version  = "1.1.0"
     def glide_version = "4.9.0"
+    def anko_version = "0.10.8"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -114,5 +115,8 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     //Mapbox SDK
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.8.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v8:0.9.0'
+
+    // Anko
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
 }

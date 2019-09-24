@@ -1,4 +1,4 @@
-package tech.ducletran.travelgalleryupgrade.utils
+package tech.ducletran.travelgalleryupgrade.customclass
 
 import androidx.annotation.StringRes
 import tech.ducletran.travelgalleryupgrade.BaseApplication

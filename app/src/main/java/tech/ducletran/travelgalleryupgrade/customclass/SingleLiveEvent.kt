@@ -1,4 +1,4 @@
-package tech.ducletran.travelgalleryupgrade.utils
+package tech.ducletran.travelgalleryupgrade.customclass
 
 /*
  *  Copyright 2017 Google Inc.
