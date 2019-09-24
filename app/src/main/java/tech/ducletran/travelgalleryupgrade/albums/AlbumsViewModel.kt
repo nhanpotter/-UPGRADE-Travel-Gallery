@@ -20,22 +20,8 @@ class AlbumsViewModel(
     val progress: LiveData<Boolean> = _progress
     private val _albumDeleted = MutableLiveData<Boolean>()
     val albumDeleted: LiveData<Boolean> = _albumDeleted
-    private val _albumCreatedOrUpdated = MutableLiveData<Boolean>()
-    val albumCreatedOrUpdated: LiveData<Boolean> = _albumCreatedOrUpdated
 
     fun getAllAlbums() = albumsRepo.getAllAlbums()
-
-    fun createNewAlbum(album: Album) = viewModelScope.launch {
-        albumsRepo.addAlbum(album)
-        message.value = "New album - ${album.title} created"
-        _albumCreatedOrUpdated.value = true
-    }
-
-    fun updateAlbum(album: Album) = viewModelScope.launch {
-        albumsRepo.updateAlbum(album)
-        message.value = "Album - ${album.title} updated"
-        _albumCreatedOrUpdated.value = true
-    }
 
     fun getAlbumById(albumId: Long): LiveData<Album> = albumsRepo.getAlbumById(albumId)
 

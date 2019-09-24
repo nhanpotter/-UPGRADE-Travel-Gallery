@@ -5,6 +5,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import tech.ducletran.travelgalleryupgrade.BaseDatabase
+import tech.ducletran.travelgalleryupgrade.albums.AlbumNewUpdateViewModel
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsRepo
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsViewModel
 import tech.ducletran.travelgalleryupgrade.photodetails.PhotoDetailsViewModel
@@ -43,4 +44,5 @@ val viewModelModule = module {
     viewModel { PhotosViewModel(get()) }
     viewModel { PhotoDetailsViewModel(get(), get()) }
     viewModel { AlbumsViewModel(get(), get(), get()) }
+    viewModel { AlbumNewUpdateViewModel(get(), get(), get()) }
 }

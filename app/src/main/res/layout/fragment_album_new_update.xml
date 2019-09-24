@@ -28,10 +28,12 @@
             android:text="@string/album_overview"/>
 
         <ImageView
+            android:id="@+id/coverImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/ic_launcher_foreground"
+            android:background="@drawable/default_cover_image"
             android:scaleType="centerCrop"
+            android:foreground="?selectableItemBackground"
             android:layout_marginBottom="@dimen/margin_medium"/>
 
         <com.google.android.material.textfield.TextInputLayout

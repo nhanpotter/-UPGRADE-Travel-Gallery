@@ -15,6 +15,9 @@ interface PhotosDao {
     @Query("SELECT * FROM photo WHERE id = :id")
     fun getPhotoById(id: Long): LiveData<Photo>
 
+    @Query("SELECT * FROM photo WHERE id = :id")
+    suspend fun getPhotoWithId(id: Long): Photo
+
     @Query("DELETE FROM photo WHERE id = :photoId")
     suspend fun deletePhoto(photoId: Long)
 

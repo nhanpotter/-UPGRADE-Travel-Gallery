@@ -61,5 +61,7 @@
     <string name="updating_album">Updating Album</string>
     <string name="error_message_empty_album_name">Album name cannot be empty</string>
     <string name="error_message_no_album_type_selected">Select an album type</string>
+    <string name="message_no_photos_to_select">There is no photo to select</string>
+    <string name="choose_a_cover_image">Choose a cover image</string>
 
 </resources>

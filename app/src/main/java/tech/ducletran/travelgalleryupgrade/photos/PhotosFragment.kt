@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_photos.view.photoGrids
 import kotlinx.android.synthetic.main.fragment_photos.view.loadPhotosButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
+import tech.ducletran.travelgalleryupgrade.customclass.GridSpacingItemDecoration
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 import tech.ducletran.travelgalleryupgrade.ext.notNull
 import tech.ducletran.travelgalleryupgrade.ext.snackbar
@@ -45,6 +46,7 @@ class PhotosFragment : Fragment() {
 
         rootView.photoGrids.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         rootView.photoGrids.adapter = photosAdapter
+        rootView.photoGrids.addItemDecoration(GridSpacingItemDecoration(4, 16, true))
 
         photosViewModel.photos
             .nonNull()

@@ -29,4 +29,6 @@ class PhotosRepo(
 
     suspend fun setPhotoFriend(photoId: Long, isFriend: Boolean) =
             photosDao.setFriend(photoId, isFriend)
+
+    suspend fun getPhotoWithId(photoId: Long) = photosDao.getPhotoWithId(photoId)
 }
