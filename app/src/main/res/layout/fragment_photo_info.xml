@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <data>
     <variable
         name="photo"
@@ -17,6 +16,17 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:max="100"
+            android:progress="45"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="@{`Date Taken: ` + photo.dateTaken}"
+            app:dateTaken="@{photo.dateTaken}"
             app:hideIfEmpty="@{photo.dateTaken}"
             tools:text="Date Taken: 11/11/2000"/>
 
@@ -67,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="@{`Size: ` + photo.size + `MB`}"
+            app:size="@{photo.size}"
             app:hideIfEmpty="@{photo.size}"
             tools:text="Size: 100MB"/>
 
@@ -79,6 +89,29 @@
             android:layout_marginStart="@dimen/margin_large"
             android:text="@string/location"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large">
+            <Button
+                android:id="@+id/chooseLocationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_location"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                app:latitude="@{photo.latitude}"
+                app:longitude="@{photo.longitude}"
+                tools:text="(53,22 - 100,34)"/>
+
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/previewMap"
             android:layout_width="match_parent"
@@ -86,6 +119,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             app:latitude="@{photo.latitude}"
             app:longitude="@{photo.longitude}"
+            android:background="@drawable/default_cover_image"
             android:foreground="?selectableItemBackground"/>
 
     </LinearLayout>

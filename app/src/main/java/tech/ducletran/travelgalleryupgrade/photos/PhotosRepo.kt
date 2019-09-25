@@ -1,6 +1,7 @@
 package tech.ducletran.travelgalleryupgrade.photos
 
 import androidx.lifecycle.LiveData
+import tech.ducletran.travelgalleryupgrade.utils.DateUtils
 
 class PhotosRepo(
     private val photosDao: PhotosDao
@@ -8,8 +9,17 @@ class PhotosRepo(
     fun loadAllPhotos(): LiveData<List<Photo>> = photosDao.getAllPhotos()
 
     suspend fun addPhotos(photos: List<Photo>) {
-        photosDao.insertPhotos(photos)
+        photosDao.insertPhotos(photos.map {
+            if (it.dateTaken.isNotEmpty())
+                it.dateTaken = DateUtils.convertDateBetweenFormats(
+                    it.dateTaken,DateUtils.FORMAT_DATE_FROM_FILE, DateUtils.FORMAT_DATE_DETAILS)
+            if (it.description == "cof")
+                it.description = ""
+            it
+        })
     }
+
+    suspend fun updatePhoto(photo: Photo) = photosDao.updatePhoto(photo)
 
     fun loadPhoto(photoId: Long) = photosDao.getPhotoById(photoId)
 

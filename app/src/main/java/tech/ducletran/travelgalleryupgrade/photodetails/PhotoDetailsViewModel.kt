@@ -1,5 +1,7 @@
 package tech.ducletran.travelgalleryupgrade.photodetails
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -7,6 +9,7 @@ import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.photos.PhotosRepo
 import tech.ducletran.travelgalleryupgrade.customclass.Resource
 import tech.ducletran.travelgalleryupgrade.customclass.SingleLiveEvent
+import tech.ducletran.travelgalleryupgrade.photos.Photo
 
 class PhotoDetailsViewModel(
     private val photosRepo: PhotosRepo,
@@ -14,11 +17,20 @@ class PhotoDetailsViewModel(
 ) : ViewModel() {
 
     val message = SingleLiveEvent<String>()
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
 
     fun loadPhoto(photoId: Long) = photosRepo.loadPhoto(photoId)
 
     fun removePhoto(photoId: Long) = viewModelScope.launch {
         photosRepo.removePhoto(photoId)
+    }
+
+    fun updatePhoto(photo: Photo) = viewModelScope.launch {
+        _loading.value = true
+        photosRepo.updatePhoto(photo)
+        _loading.value = false
+        message.value = resource.getString(R.string.message_photo_updated)
     }
 
     fun setFriend(photoId: Long, isFriend: Boolean) = viewModelScope.launch {

@@ -57,6 +57,7 @@
     <string name="creating_new_album">Creating New Album</string>
     <string name="album_name">Album Name</string>
     <string name="album_description">Album Description</string>
+    <string name="photo_description">Photo Description</string>
     <string name="album_overview">Album Overview</string>
     <string name="choose_location">Choose Location</string>
     <string name="no_location_selected">No Location Selected</string>
@@ -66,5 +67,11 @@
     <string name="choose_a_cover_image">Choose a cover image</string>
     <string name="search_location">Search Location</string>
     <string name="message_select_location_for_album">Please select a location for this album</string>
+    <string name="date_taken">Date Taken</string>
+    <string name="edit_photo">Edit Photo</string>
+    <string name="update_photo_info">Update photo information</string>
+    <string name="save">Save</string>
+    <string name="message_photo_updated">Photo updated</string>
+    <string name="searching_for_location">Searching for location</string>
 
 </resources>

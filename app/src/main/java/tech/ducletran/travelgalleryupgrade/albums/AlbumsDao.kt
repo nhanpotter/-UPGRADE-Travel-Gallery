@@ -36,4 +36,7 @@ interface AlbumsDao {
 
     @Query("SELECT * FROM album WHERE id = :albumId")
     fun getAlbumById(albumId: Long): LiveData<Album>
+
+    @Query("UPDATE album SET dateUpdated = :dateUpdated WHERE id = :albumId")
+    suspend fun notifyAlbumUpdated(albumId: Long, dateUpdated: String)
 }

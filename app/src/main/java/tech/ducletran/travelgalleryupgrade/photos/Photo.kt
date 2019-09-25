@@ -12,12 +12,13 @@ data class Photo(
     val isFavorite: Boolean = false,
     val isFood: Boolean = false,
     val isFriend: Boolean = false,
-    val dateTaken: String = "",
-    val latitude: String = "",
-    val longitude: String = "",
+    var dateTaken: String = "",
+    var latitude: String = "",
+    var longitude: String = "",
     val size: String = "",
-    val title: String = "",
-    val description: String = "",
+    var title: String = "",
+    var description: String = "",
+    var placeName: String = "",
     val width: String = "",
     val height: String = ""
 )

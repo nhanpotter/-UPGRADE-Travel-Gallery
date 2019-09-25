@@ -44,6 +44,18 @@
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_medium"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="italic"
+            android:text="@{`Date updated: ` + album.dateUpdated}"
+            hideIfEmpty="@{album.dateUpdated}"
+            tools:text="Date upated: 11/7/2019"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="@{album.description}"
