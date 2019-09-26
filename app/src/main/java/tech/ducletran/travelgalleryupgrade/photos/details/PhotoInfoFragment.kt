@@ -1,4 +1,4 @@
-package tech.ducletran.travelgalleryupgrade.photodetails
+package tech.ducletran.travelgalleryupgrade.photos.details
 
 import android.content.Intent
 import android.net.Uri
@@ -32,7 +32,8 @@ import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
 import tech.ducletran.travelgalleryupgrade.BuildConfig
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
-import java.util.*
+import java.util.Date
+import java.util.Calendar
 
 class PhotoInfoFragment : Fragment() {
 
@@ -121,8 +122,8 @@ class PhotoInfoFragment : Fragment() {
         rootView.isVisible = true
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_LOCATION_REQUEST_CODE) {
             val feature = PlaceAutocomplete.getPlace(data)
-            photo.latitude = (feature.center()?.latitude()?: "").toString()
-            photo.longitude = (feature.center()?.longitude()?: "").toString()
+            photo.latitude = (feature.center()?.latitude() ?: "").toString()
+            photo.longitude = (feature.center()?.longitude() ?: "").toString()
             feature.placeName()?.split(",")?.let {
                 photo.placeName = it.first()
             }
@@ -131,7 +132,7 @@ class PhotoInfoFragment : Fragment() {
     }
 
     private fun editCurrentPhoto(photo: Photo) {
-        val view = layoutInflater.inflate(R.layout.dialog_edit_photo_info,null)
+        val view = layoutInflater.inflate(R.layout.dialog_edit_photo_info, null)
 
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.update_photo_info))

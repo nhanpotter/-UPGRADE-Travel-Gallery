@@ -1,7 +1,8 @@
 package tech.ducletran.travelgalleryupgrade.utils
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object DateUtils {
 
@@ -15,8 +16,8 @@ object DateUtils {
         return formatter.format(date)
     }
 
-    fun convertStringToDate(date: String, format: String): Date
-            =  SimpleDateFormat(format, Locale.US).parse(date)!!
+    fun convertStringToDate(date: String, format: String): Date =
+            SimpleDateFormat(format, Locale.US).parse(date)!!
 
     fun getCurrentDateString(format: String) = convertDateToString(Date(), format)
 

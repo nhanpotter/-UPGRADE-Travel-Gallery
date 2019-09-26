@@ -12,7 +12,7 @@ class PhotosRepo(
         photosDao.insertPhotos(photos.map {
             if (it.dateTaken.isNotEmpty())
                 it.dateTaken = DateUtils.convertDateBetweenFormats(
-                    it.dateTaken,DateUtils.FORMAT_DATE_FROM_FILE, DateUtils.FORMAT_DATE_DETAILS)
+                    it.dateTaken, DateUtils.FORMAT_DATE_FROM_FILE, DateUtils.FORMAT_DATE_DETAILS)
             if (it.description == "cof")
                 it.description = ""
             it

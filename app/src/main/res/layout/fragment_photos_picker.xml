@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photoGrids"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_large">
+        <ImageView
+            android:id="@+id/emptyPhotoView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintLeft_toLeftOf="@id/emptyView"
+            app:layout_constraintRight_toRightOf="@id/emptyView"
+            app:layout_constraintTop_toTopOf="@id/emptyView"
+            app:layout_constraintBottom_toBottomOf="@id/emptyView"
+            android:src="@drawable/ic_photo_empty"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/emptyView"
+            app:layout_constraintRight_toRightOf="@id/emptyView"
+            app:layout_constraintTop_toBottomOf="@id/emptyPhotoView"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:text="@string/message_empty_view_photos_select"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

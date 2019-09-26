@@ -91,6 +91,8 @@ class AlbumDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.actionAddPhotos -> {
+                findNavController(rootView).navigate(AlbumDetailsFragmentDirections
+                    .actionAlbumDetailsToPhotoPicker(safeArgs.albumId))
                 true
             }
             R.id.actionDeleteAlbum -> {

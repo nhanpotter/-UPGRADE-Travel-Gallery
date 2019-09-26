@@ -14,7 +14,7 @@ class AlbumsRepo(
     ))
 
     suspend fun updateAlbum(album: Album) = albumsDao.updateAlbum(album.copy(
-        dateUpdated = DateUtils.convertDateToString(Date(),DateUtils.FORMAT_DATE_DETAILS)
+        dateUpdated = DateUtils.convertDateToString(Date(), DateUtils.FORMAT_DATE_DETAILS)
     ))
 
     suspend fun removeAlbum(albumId: Long) {
@@ -29,6 +29,12 @@ class AlbumsRepo(
 
     suspend fun addPhotosToAlbum(photos: List<Photo>, albumId: Long) {
         val photosAndAlbums = photos.map { AlbumAndPhoto(it.id, albumId) }
+        albumsDao.addPhotosToAlbum(photosAndAlbums)
+        albumsDao.notifyAlbumUpdated(albumId, DateUtils.getCurrentDateString(DateUtils.FORMAT_DATE_DETAILS))
+    }
+
+    suspend fun addPhotoIdsToAlbum(photos: List<Long>, albumId: Long) {
+        val photosAndAlbums = photos.map { AlbumAndPhoto(it, albumId) }
         albumsDao.addPhotosToAlbum(photosAndAlbums)
         albumsDao.notifyAlbumUpdated(albumId, DateUtils.getCurrentDateString(DateUtils.FORMAT_DATE_DETAILS))
     }

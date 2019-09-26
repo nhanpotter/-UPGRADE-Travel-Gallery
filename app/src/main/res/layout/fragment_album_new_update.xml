@@ -105,14 +105,20 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/photoSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/photos"
             android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_large"
             style="@style/TitleText"/>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photosRemoveGrid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"/>
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

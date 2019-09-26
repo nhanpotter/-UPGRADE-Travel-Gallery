@@ -17,10 +17,16 @@
     <string name="message_photo_removed_from_favorite">This photo is removed from favorite\'s list</string>
     <string name="message_photo_removed_from_food">This photo is removed from food\'s list</string>
     <string name="message_empty_view_photos">Let\'s add some travel photos to the app</string>
+    <string name="message_empty_view_photos_select">There are no photos to select</string>
     <string name="message_empty_view_album_details">There is no photo. Let\'s add some travel photos to this album</string>
     <string name="message_empty_view_albums">Let\'s create an album to store photos</string>
     <string name="message_empty_view_travel_lists">Let\'s add some travel location to the wish list</string>
     <string name="message_empty_view_locations">No locations found. Please type in a different keyword</string>
+    <string name="message_select_location_for_album">Please select a location for this album</string>
+    <string name="message_delete_album">Deleting this album is permanent. Photos that were in this album remain in the app</string>
+    <string name="message_no_photos_to_select">There is no photo to select</string>
+    <string name="message_photo_updated">Photo updated</string>
+    <string name="message_photos_added_to_album">Photos were added to your album</string>
 
     // Error messages
     <string name="error_message_photo_remove_from_friend">Opps, somehow photo is not removed from friend\'s list</string>
@@ -29,7 +35,6 @@
     <string name="error_message_photo_add_to_friend">Opps, somehow photo is not added to friend\'s list</string>
     <string name="error_message_photo_add_to_favorite">Opps, somehow photo is not added to favorite\'s list</string>
     <string name="error_message_photo_add_to_food">Opps, somehow photo is not added to food\'s list</string>
-    <string name="message_delete_album">Deleting this album is permanent. Photos that were in this album remain in the app</string>
     <string name="error_message_empty_album_name">Album name cannot be empty</string>
     <string name="error_message_no_album_type_selected">Select an album type</string>
 
@@ -63,15 +68,14 @@
     <string name="no_location_selected">No Location Selected</string>
     <string name="new_update_album">New/Update Album</string>
     <string name="updating_album">Updating Album</string>
-    <string name="message_no_photos_to_select">There is no photo to select</string>
     <string name="choose_a_cover_image">Choose a cover image</string>
     <string name="search_location">Search Location</string>
-    <string name="message_select_location_for_album">Please select a location for this album</string>
     <string name="date_taken">Date Taken</string>
     <string name="edit_photo">Edit Photo</string>
     <string name="update_photo_info">Update photo information</string>
     <string name="save">Save</string>
-    <string name="message_photo_updated">Photo updated</string>
     <string name="searching_for_location">Searching for location</string>
+    <string name="select_photos">Select Photos</string>
+    <string name="photos_select">Photos Select</string>
 
 </resources>

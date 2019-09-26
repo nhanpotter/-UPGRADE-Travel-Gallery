@@ -31,6 +31,12 @@ class AlbumNewUpdateViewModel(
         _albumCreatedOrUpdated.value = true
     }
 
+    fun removePhotoFromAlbum(photoId: Long, albumId: Long) = viewModelScope.launch {
+        albumsRepo.removePhotoFromAlbum(photoId, albumId)
+    }
+
+    fun getPhotosFromAlbum(albumId: Long) = albumsRepo.getPhotosFromAlbum(albumId)
+
     fun setCoverImage(coverImage: String) {
         if (_coverImage.value.isNullOrEmpty())
             _coverImage.value = coverImage

@@ -1,4 +1,4 @@
-package tech.ducletran.travelgalleryupgrade.photodetails
+package tech.ducletran.travelgalleryupgrade.photos.details
 
 import android.content.Intent
 import android.net.Uri
@@ -78,8 +78,11 @@ class PhotoDetailsFragment : Fragment() {
             }
         }
         rootView.infoButton.setOnClickListener {
-            findNavController(rootView).navigate(PhotoDetailsFragmentDirections
-                .actionPhotoDetailsToPhotoInfo(safeArgs.photoId))
+            findNavController(rootView).navigate(
+                PhotoDetailsFragmentDirections.actionPhotoDetailsToPhotoInfo(
+                    safeArgs.photoId
+                )
+            )
         }
         rootView.favoriteButton.setOnClickListener {
             photoDetailsViewModel.setFavorite(safeArgs.photoId, !photo.isFavorite)

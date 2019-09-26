@@ -1,4 +1,4 @@
-package tech.ducletran.travelgalleryupgrade.photodetails
+package tech.ducletran.travelgalleryupgrade.photos.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

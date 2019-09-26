@@ -88,10 +88,15 @@ fun showSize(textView: TextView, size: String?) {
 
     val sizeNumber = size.toInt()
     val sizeString = when {
-        sizeNumber > 1000000 -> "${sizeNumber/1000000}MB"
-        sizeNumber in 1000..99999 -> "${sizeNumber/1000}KB"
+        sizeNumber > 1000000 -> "${sizeNumber / 1000000}MB"
+        sizeNumber in 1000..99999 -> "${sizeNumber / 1000}KB"
         else -> "${sizeNumber}B"
     }
 
     textView.text = "Size: $sizeString"
+}
+
+@BindingAdapter("isSelected")
+fun selectPhoto(imageView: ImageView, isSelected: Boolean) {
+    imageView.isVisible = isSelected
 }

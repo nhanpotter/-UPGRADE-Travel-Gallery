@@ -9,11 +9,12 @@ import tech.ducletran.travelgalleryupgrade.albums.AlbumNewUpdateViewModel
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsRepo
 import tech.ducletran.travelgalleryupgrade.albums.AlbumsViewModel
 import tech.ducletran.travelgalleryupgrade.customclass.Preference
-import tech.ducletran.travelgalleryupgrade.photodetails.PhotoDetailsViewModel
+import tech.ducletran.travelgalleryupgrade.photos.details.PhotoDetailsViewModel
 import tech.ducletran.travelgalleryupgrade.photos.PhotosRepo
 import tech.ducletran.travelgalleryupgrade.photos.PhotosViewModel
 import tech.ducletran.travelgalleryupgrade.customclass.Resource
 import tech.ducletran.travelgalleryupgrade.location.LocationViewModel
+import tech.ducletran.travelgalleryupgrade.photos.picker.PickPhotosViewModel
 
 val commonModule = module {
     single { Resource() }
@@ -45,8 +46,14 @@ val databaseModule = module {
 
 val viewModelModule = module {
     viewModel { PhotosViewModel(get()) }
-    viewModel { PhotoDetailsViewModel(get(), get()) }
+    viewModel {
+        PhotoDetailsViewModel(
+            get(),
+            get()
+        )
+    }
     viewModel { AlbumsViewModel(get(), get(), get()) }
     viewModel { AlbumNewUpdateViewModel(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
+    viewModel { PickPhotosViewModel(get(), get(), get()) }
 }

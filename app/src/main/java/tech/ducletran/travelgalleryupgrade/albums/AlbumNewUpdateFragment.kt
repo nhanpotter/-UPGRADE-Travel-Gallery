@@ -16,18 +16,21 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.dialog_pick_photo.view.*
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.title
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.locationRadioButton
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.othersRadioButton
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.radioGroup
+import kotlinx.android.synthetic.main.dialog_pick_photo.view.photoRecyclerView
+import kotlinx.android.synthetic.main.dialog_pick_photo.view.noPhotoTextView
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.location
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.coverImage
 import kotlinx.android.synthetic.main.fragment_album_new_update.view.name
 import kotlinx.android.synthetic.main.fragment_album_new_update.view.nameLayout
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.photosRemoveGrid
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.title
 import kotlinx.android.synthetic.main.fragment_album_new_update.view.description
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.location
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.radioGroup
 import kotlinx.android.synthetic.main.fragment_album_new_update.view.locationLayout
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.othersRadioButton
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.locationRadioButton
 import kotlinx.android.synthetic.main.fragment_album_new_update.view.chooseLocationButton
-import kotlinx.android.synthetic.main.fragment_album_new_update.view.coverImage
+import kotlinx.android.synthetic.main.fragment_album_new_update.view.photoSection
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.customclass.GridSpacingItemDecoration
@@ -47,6 +50,7 @@ class AlbumNewUpdateFragment : Fragment() {
     private val albumNewUpdateViewModel by viewModel<AlbumNewUpdateViewModel>()
     private lateinit var album: Album
     private val preference = Preference()
+    private val updateAlbumAdapter = UpdateAlbumAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +87,17 @@ class AlbumNewUpdateFragment : Fragment() {
         }
 
         if (safeArgs.albumId != -1L) {
+            rootView.photosRemoveGrid.adapter = updateAlbumAdapter
+            rootView.photosRemoveGrid.layoutManager = GridLayoutManager(requireContext(), 2)
+            rootView.photosRemoveGrid.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+
+            albumNewUpdateViewModel.getPhotosFromAlbum(safeArgs.albumId)
+                .nonNull()
+                .observe(viewLifecycleOwner, Observer {
+                    updateAlbumAdapter.submitList(it)
+                    rootView.photoSection.isVisible = it.isNotEmpty()
+                })
+
             rootView.title.text = getString(R.string.updating_album)
             albumNewUpdateViewModel.getAlbumById(safeArgs.albumId)
                 .nonNull()
@@ -139,6 +154,12 @@ class AlbumNewUpdateFragment : Fragment() {
                 }
             }
         }
+
+        updateAlbumAdapter.applyListener(object : RemovePhotoListener {
+            override fun removePhoto(photoId: Long) {
+                albumNewUpdateViewModel.removePhotoFromAlbum(photoId, safeArgs.albumId)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
