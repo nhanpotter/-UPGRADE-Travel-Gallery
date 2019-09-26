@@ -195,7 +195,7 @@ class AlbumNewUpdateFragment : Fragment() {
         albumNewUpdateViewModel.getAllPhotos()
             .nonNull()
             .observe(viewLifecycleOwner, Observer {
-                adapter.addPhotos(it)
+                adapter.submitList(it)
                 dialogView.noPhotoTextView.isVisible = it.isEmpty()
             })
 

@@ -10,22 +10,32 @@ import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.MenuInflater
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.dialog_sort_photos.view.sortByDate
+import kotlinx.android.synthetic.main.dialog_sort_photos.view.sortRandom
 import kotlinx.android.synthetic.main.fragment_photos.view.emptyView
 import kotlinx.android.synthetic.main.fragment_photos.view.photoGrids
 import kotlinx.android.synthetic.main.fragment_photos.view.loadPhotosButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.customclass.GridSpacingItemDecoration
+import tech.ducletran.travelgalleryupgrade.customclass.Preference
 import tech.ducletran.travelgalleryupgrade.ext.nonNull
 import tech.ducletran.travelgalleryupgrade.ext.notNull
 import tech.ducletran.travelgalleryupgrade.ext.snackbar
+import tech.ducletran.travelgalleryupgrade.utils.DateUtils
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLatitude
 import tech.ducletran.travelgalleryupgrade.utils.Utils.getLongitude
+
+const val SORT_PHOTOS = "sortPhotos" // TRUE = Date FALSE = Random
 
 class PhotosFragment : Fragment() {
 
@@ -33,6 +43,7 @@ class PhotosFragment : Fragment() {
         private const val PICK_PHOTO_REQUEST_CODE = 1
     }
 
+    private val preference = Preference()
     private val photosAdapter = PhotosAdapter()
     private lateinit var rootView: View
     private val photosViewModel by viewModel<PhotosViewModel>()
@@ -42,6 +53,7 @@ class PhotosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         rootView = inflater.inflate(R.layout.fragment_photos, container, false)
 
         rootView.photoGrids.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
@@ -51,8 +63,13 @@ class PhotosFragment : Fragment() {
         photosViewModel.photos
             .nonNull()
             .observe(viewLifecycleOwner, Observer {
-                photosAdapter.addPhotos(it)
-                rootView.emptyView.isVisible = it.isEmpty()
+                val photos = if (preference.getBoolean(SORT_PHOTOS, true))
+                    it.sortedBy { DateUtils.convertStringToDate(it.dateTaken, DateUtils.FORMAT_DATE_DETAILS) }
+                        else
+                    it.shuffled()
+
+                photosAdapter.submitList(photos)
+                rootView.emptyView.isVisible = photos.isEmpty()
             })
 
         photosViewModel.message
@@ -77,6 +94,21 @@ class PhotosFragment : Fragment() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_photos, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.actionSort -> {
+                sortPhotos()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_PHOTO_REQUEST_CODE) {
@@ -88,6 +120,32 @@ class PhotosFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun sortPhotos() {
+        val view = layoutInflater.inflate(R.layout.dialog_sort_photos, null)
+        view.sortByDate.isChecked = preference.getBoolean(SORT_PHOTOS, true)
+        view.sortRandom.isChecked = !preference.getBoolean(SORT_PHOTOS, true)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.sort_photos))
+            .setMessage(getString(R.string.choose_sorting_option))
+            .setView(view)
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.cancel()
+            }.setPositiveButton(getString(R.string.apply)) { dialog, _ ->
+                preference.putBoolean(SORT_PHOTOS, view.sortByDate.isChecked)
+                photosViewModel.photos.value?.let {
+                    val photos = if (preference.getBoolean(SORT_PHOTOS, true))
+                        it.sortedBy { DateUtils.convertStringToDate(it.dateTaken, DateUtils.FORMAT_DATE_DETAILS) }
+                    else
+                        it.shuffled()
+
+                    photosAdapter.submitList(photos)
+                }
+                dialog.cancel()
+            }.create()
+            .show()
     }
 
     private fun handleOnePhotoPicked(photoUri: Uri) {

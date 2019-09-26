@@ -46,12 +46,7 @@ val databaseModule = module {
 
 val viewModelModule = module {
     viewModel { PhotosViewModel(get()) }
-    viewModel {
-        PhotoDetailsViewModel(
-            get(),
-            get()
-        )
-    }
+    viewModel { PhotoDetailsViewModel(get(), get()) }
     viewModel { AlbumsViewModel(get(), get(), get()) }
     viewModel { AlbumNewUpdateViewModel(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }

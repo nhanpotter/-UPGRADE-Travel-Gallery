@@ -2,18 +2,13 @@ package tech.ducletran.travelgalleryupgrade.photos
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import tech.ducletran.travelgalleryupgrade.databinding.ItemPhotoBinding
 
-class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
-    private val photos = mutableListOf<Photo>()
+class PhotosAdapter : ListAdapter<Photo, PhotosViewHolder>(PhotoDiffUtil()) {
     private var photoClickListener: PhotoClickListener? = null
-
-    fun addPhotos(photosList: List<Photo>) {
-        if (photos.isNotEmpty()) photos.clear()
-        photos.addAll(photosList)
-        notifyDataSetChanged()
-    }
 
     fun applyListener(onPhotoClicked: PhotoClickListener) {
         photoClickListener = onPhotoClicked
@@ -25,11 +20,15 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosViewHolder>() {
         return PhotosViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = photos.size
-
     override fun onBindViewHolder(holder: PhotosViewHolder, position: Int) {
-        holder.bind(photos[position], photoClickListener)
+        holder.bind(getItem(position), photoClickListener)
     }
+}
+
+class PhotoDiffUtil : DiffUtil.ItemCallback<Photo>() {
+    override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean = oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean = oldItem == newItem
 }
 
 class PhotosViewHolder(private val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root) {

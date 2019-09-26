@@ -58,6 +58,7 @@
     <string name="description_people_album">My collection of people I met around the world</string>
     <string name="delete_this_album">Delete this album?</string>
     <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
     <string name="continue_string">Continue</string>
     <string name="creating_new_album">Creating New Album</string>
     <string name="album_name">Album Name</string>
@@ -77,5 +78,9 @@
     <string name="searching_for_location">Searching for location</string>
     <string name="select_photos">Select Photos</string>
     <string name="photos_select">Photos Select</string>
+    <string name="sort_photos">Sort Photos</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_randomly">Sort randomly</string>
+    <string name="choose_sorting_option">Choose your sorting option:</string>
 
 </resources>

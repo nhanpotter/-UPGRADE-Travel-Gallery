@@ -49,7 +49,7 @@ class AlbumDetailsFragment : Fragment() {
         albumsViewModel.getPhotosFromAlbum(safeArgs.albumId)
             .nonNull()
             .observe(viewLifecycleOwner, Observer {
-                photosAdapter.addPhotos(it)
+                photosAdapter.submitList(it)
                 rootView.emptyView.isVisible = it.isEmpty()
             })
 
