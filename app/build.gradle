@@ -119,4 +119,7 @@ dependencies {
 
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
+    // PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }

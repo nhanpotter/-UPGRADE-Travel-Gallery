@@ -14,7 +14,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
-    <ImageView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_black_opacity"/>
+    </com.google.android.material.appbar.AppBarLayout>
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:photoUrl="@{photo.url}"

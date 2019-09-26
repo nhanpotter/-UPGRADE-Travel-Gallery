@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,6 +19,10 @@ import kotlinx.android.synthetic.main.fragment_photo_details.view.infoButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.friendButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.foodButton
 import kotlinx.android.synthetic.main.fragment_photo_details.view.shareButton
+import kotlinx.android.synthetic.main.fragment_photo_details.view.photoView
+import kotlinx.android.synthetic.main.fragment_photo_details.view.bottomTaskLayout
+import kotlinx.android.synthetic.main.fragment_photo_details.view.toolbar
+import kotlinx.android.synthetic.main.fragment_photo_details.view.toolbarLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import tech.ducletran.travelgalleryupgrade.R
 import tech.ducletran.travelgalleryupgrade.databinding.FragmentPhotoDetailsBinding
@@ -40,9 +44,10 @@ class PhotoDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo_details, container, false)
         rootView = binding.root
+
+        setupToolbar()
 
         photoDetailsViewModel.message
             .observe(viewLifecycleOwner, Observer {
@@ -60,11 +65,6 @@ class PhotoDetailsFragment : Fragment() {
         return rootView
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.fragment_photo_details, menu)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -77,6 +77,13 @@ class PhotoDetailsFragment : Fragment() {
                 startActivity(Intent.createChooser(this, "Share Image"))
             }
         }
+
+        rootView.photoView.setOnViewTapListener { _, _, _ ->
+            rootView.toolbarLayout.visibility =
+                if (rootView.bottomTaskLayout.isVisible) View.INVISIBLE else View.VISIBLE
+            rootView.bottomTaskLayout.isVisible = !rootView.bottomTaskLayout.isVisible
+        }
+
         rootView.infoButton.setOnClickListener {
             findNavController(rootView).navigate(
                 PhotoDetailsFragmentDirections.actionPhotoDetailsToPhotoInfo(
@@ -95,25 +102,49 @@ class PhotoDetailsFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.actionRemovePhoto -> {
-                photoDetailsViewModel.removePhoto(safeArgs.photoId)
-                activity?.onBackPressed()
-                true
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.let {
+            if (it is AppCompatActivity) {
+                it.supportActionBar?.show()
             }
-            R.id.actionUseAsPhoto -> {
-                val usePhotoIntent = Intent()
-                with(usePhotoIntent) {
-                    action = Intent.ACTION_ATTACH_DATA
-                    type = "image/*"
-                    addCategory(Intent.CATEGORY_DEFAULT)
-                    putExtra(Intent.EXTRA_STREAM, Uri.parse(photo.url))
-                    startActivity(Intent.createChooser(this, "Set As"))
+        }
+    }
+
+    private fun setupToolbar() {
+        activity?.let {
+            if (it is AppCompatActivity) {
+                it.supportActionBar?.hide()
+            }
+        }
+
+        rootView.toolbar.title = ""
+        rootView.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        rootView.toolbar.overflowIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_more_vert)
+        rootView.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+        rootView.toolbar.inflateMenu(R.menu.fragment_photo_details)
+        rootView.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.actionRemovePhoto -> {
+                    photoDetailsViewModel.removePhoto(safeArgs.photoId)
+                    activity?.onBackPressed()
+                    true
                 }
-                true
+                R.id.actionUseAsPhoto -> {
+                    val usePhotoIntent = Intent()
+                    with(usePhotoIntent) {
+                        action = Intent.ACTION_ATTACH_DATA
+                        type = "image/*"
+                        addCategory(Intent.CATEGORY_DEFAULT)
+                        putExtra(Intent.EXTRA_STREAM, Uri.parse(photo.url))
+                        startActivity(Intent.createChooser(this, "Set As"))
+                    }
+                    true
+                }
+                else -> super.onOptionsItemSelected(it)
             }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 }
